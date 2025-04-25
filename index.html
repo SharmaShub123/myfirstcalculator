@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class="display">
+                    <input type="text" id="display" placeholder="0">
+                </div>
+                <div>
+                    <input type="button" value="AC" onclick="allClear()"  style="background-color: darkgray;">
+                    <input type="button" value="DE" onclick=" dele()" style="background-color: darkgray;">
+                    <input type="button" value="." onclick="displayVal('.')" style="background-color: darkgray;">
+                    <input type="button" value="/" onclick="displayVal(`/`)" style="background-color: darkorange;">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="displayVal(7)">
+                    <input type="button" value="8" onclick="displayVal(8)">
+                    <input type="button" value="9" onclick="displayVal(9)">
+                    <input type="button" value="*" onclick="displayVal(`*`)" style="background-color: darkorange;">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="displayVal(4)">
+                    <input type="button" value="5" onclick="displayVal(5)">
+                    <input type="button" value="6" onclick="displayVal(6)">
+                    <input type="button" value="-" onclick="displayVal(`-`)" style="background-color: darkorange;">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="displayVal(1)">
+                    <input type="button" value="2" onclick="displayVal(2)">
+                    <input type="button" value="3" onclick="displayVal(3)">
+                    <input type="button" value="+" onclick="displayVal('+')" style="background-color: darkorange;">
+                </div>
+                <div>
+                    <input type="button" value="00" onclick="displayVal('00')">
+                    <input type="button" value="0" onclick="displayVal(0)">
+                    <input type="button" value="=" onclick="calculate()" id="result" class="equal">
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script>
+
+    let result = "";
+
+    function displayVal(x) {
+        const display = document.getElementById("display");
+        const lastChar = display.value.slice(-1);
+        const operators = ["+", "-", "*", "/"];
+
+
+        if (operators.includes(lastChar) && operators.includes(x)) {
+            display.value = display.value.slice(0, -1) + x;
+            return;
+        }
+
+        display.value += x;
+    }
+
+
+
+
+
+    function displayopt(x) {
+        const display = document.getElementById("display");
+        display.value = x
+
+    }
+
+
+    // function calculate() {
+
+    //     const display = document.getElementById("display");
+    //     display.value = eval(display.value);
+
+    // }
+
+    function calculate() {
+        const display = document.getElementById("display");
+        try {
+            display.value = new Function('return ' + display.value)();
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+
+    function allClear() {
+        const display = document.getElementById("display");
+        display.value = "";
+    }
+    function dele() {
+        const display = document.getElementById("display")
+        display.value = display.value.toString().slice(0, -1);
+
+    }
+
+</script>
+
+</html>
